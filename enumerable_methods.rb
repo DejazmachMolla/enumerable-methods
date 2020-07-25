@@ -8,6 +8,7 @@ module Enumerable
     
     self
   end
+
   def my_each_with_index
     count = 0
     while count < self.length
@@ -17,12 +18,28 @@ module Enumerable
     
     self
   end
-  
+
   def my_select
-    # your code here
+    selected = []
+    count = 0
+    while count < self.length
+      if yield(self[count])
+        selected << self[count]
+      end
+      count += 1
+    end
+      selected
   end
+
   def my_all
-    # your code here
+    count = 0
+    while count < self.length
+      if yield(self[count]) != true
+        return false
+      end
+      count += 1
+    end
+    true
   end
   def my_any
     # your code here

@@ -14,6 +14,12 @@ puts "my_each_with_index --> the array should not be affected by the end of the 
   indexed
 }
 
+puts "my_select"
+["Jhon", "Paul", "Dj", "Anna"].my_select { |name| name != "Dj" }
+
+puts "my_all"
+["Jhon", "Paul", "Dj", "Anna"].my_all { |name| name.length >= 2 }
+
 puts "my_map --> the array should be affected by the operation"
 ["Jhon", "Paul", "Dj", "Anna"].my_map { |name|
   upcased = name.upcase
