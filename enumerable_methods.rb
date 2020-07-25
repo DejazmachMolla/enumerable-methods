@@ -1,7 +1,5 @@
 module Enumerable
   def my_each
-    array = []
-
     count = 0
     while count < self.length
       yield(self[count])
@@ -11,8 +9,15 @@ module Enumerable
     self
   end
   def my_each_with_index
-    # your code here
+    count = 0
+    while count < self.length
+      yield(self[count], count)
+      count += 1
+    end
+    
+    self
   end
+  
   def my_select
     # your code here
   end
