@@ -1,6 +1,14 @@
 module Enumerable
   def my_each
-    # your code here
+    array = []
+
+    count = 0
+    while count < self.length
+      yield(self[count])
+      count += 1
+    end
+    
+    self
   end
   def my_each_with_index
     # your code here
@@ -21,13 +29,13 @@ module Enumerable
     # your code here
   end
   def my_map
-    ary = []
+    array = []
     
-    self.each do |elem|
-      ary << yield(elem)
+    self.my_each do |elem|
+      array << yield(elem)
     end
     
-    ary
+    array
   end
   def my_inject
     # your code here
