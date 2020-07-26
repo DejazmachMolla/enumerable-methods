@@ -42,7 +42,14 @@ module Enumerable
     true
   end
   def my_any
-    # your code here
+    count = 0
+    while count < self.length
+      if yield(self[count]) == true
+        return true
+      end
+      count += 1
+    end
+    false
   end
   def my_none
     # your code here
