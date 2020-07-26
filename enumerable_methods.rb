@@ -52,7 +52,14 @@ module Enumerable
     false
   end
   def my_none
-    # your code here
+    count = 0
+    while count < self.length
+      if yield(self[count]) == true
+        return false
+      end
+      count += 1
+    end
+    true
   end
   def my_count
     # your code here

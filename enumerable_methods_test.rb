@@ -23,6 +23,9 @@ puts "my_all"
 puts "my_any"
 ["Jhon", "Paul", "Dj", "Anna"].my_any { |name| name.length >= 5 }
 
+puts "my_none"
+["Jhon", "Paul", "Dj", "Anna"].my_none { |name| name.length >= 3 }
+
 puts "my_map --> the array should be affected by the operation"
 ["Jhon", "Paul", "Dj", "Anna"].my_map { |name|
   upcased = name.upcase
