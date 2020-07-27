@@ -70,6 +70,7 @@ module Enumerable
 
     self.my_select { |elem| yield(elem) }.length
   end
+
   def my_map
     array = []
     
@@ -79,9 +80,17 @@ module Enumerable
     
     array
   end
-  def my_inject
-    # your code here
+
+  def my_inject(num = nil)
+    num.nil? ? acc = 0 : acc = num
+    count = 0
+    while count < self.length
+      acc = yield(acc, self[count])
+      count += 1
+    end
+    acc
   end
+
   def multiply_els
     # your code here
   end
