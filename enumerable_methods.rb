@@ -61,17 +61,8 @@ module Enumerable
     end
     true
   end
-  def my_count(num = nil)
-    arr = self.class == Array ? self : to_a
-    return arr.length unless block_given? || num
-
-    if(!block_given? && !num)
-      return self.length 
-    end
-
-    return self.my_select { |elem| elem == num }.length if num
-
-    arr.my_select { |elem| yield(elem) }.length
+  def my_count
+    # your code here
   end
   def my_map
     array = []

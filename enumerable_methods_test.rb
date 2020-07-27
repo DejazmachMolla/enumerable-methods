@@ -26,15 +26,6 @@ puts "my_any"
 puts "my_none"
 ["Jhon", "Paul", "Dj", "Anna"].my_none { |name| name.length >= 3 }
 
-puts "my_count should return 3"
-["Jhon", "Paul", "Dj", "Anna"].my_count { |name| name.length >= 3 }
-
-puts "my_count should return 4"
-["Jhon", "Paul", "Dj", "Anna"].my_count
-
-puts "my_count should return 1"
-["Jhon", "Paul", "Dj", "Anna"].my_count("Jhon")
-
 puts "my_map --> the array should be affected by the operation"
 ["Jhon", "Paul", "Dj", "Anna"].my_map { |name|
   upcased = name.upcase
