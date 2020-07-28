@@ -81,17 +81,16 @@ module Enumerable
     array
   end
 
-  def my_inject(num = nil)
-    num.nil? ? acc = 0 : acc = num
+  def my_inject
     count = 0
     while count < self.length
-      acc = yield(acc, self[count])
+      acc = acc.nil? ? self[count] : yield(acc, self[count])
       count += 1
     end
     acc
   end
 
-  def multiply_els
-    # your code here
+  def multiply_els()
+    self.my_inject { |res, elem| res * elem }
   end
 end

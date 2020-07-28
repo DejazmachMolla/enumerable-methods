@@ -35,12 +35,15 @@ puts "my_count should return 4"
 puts "my_count should return 1"
 ["Jhon", "Paul", "Dj", "Anna"].my_count("Jhon")
 
-puts "my_inject"
-[1, 2, 3, 4].my_inject { |sum, n| sum + n }
-
 puts "my_map --> the array should be affected by the operation"
 ["Jhon", "Paul", "Dj", "Anna"].my_map { |name|
   upcased = name.upcase
   print upcased + " " #To see the upcasing really works on each element
   upcased
 }
+
+puts "my_inject"
+[1, 2, 3, 4].my_inject { |sum, n| sum + n }
+
+puts "multiply_els"
+[1, 2, 3, 4].multiply_els
