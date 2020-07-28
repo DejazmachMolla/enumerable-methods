@@ -18,13 +18,13 @@ puts "my_select"
 ["Jhon", "Paul", "Dj", "Anna"].my_select { |name| name != "Dj" }
 
 puts "my_all"
-["Jhon", "Paul", "Dj", "Anna"].my_all { |name| name.length >= 2 }
+["Jhon", "Paul", "Dj", "Anna"].my_all { |name| name.length >= 3 }
 
 puts "my_any"
-["Jhon", "Paul", "Dj", "Anna"].my_any { |name| name.length >= 5 }
+["Jhon", "Paul", "Dj", "Anna"].my_any { |name| name.length >= 3 }
 
 puts "my_none"
-["Jhon", "Paul", "Dj", "Anna"].my_none { |name| name.length >= 3 }
+["Jhon", "Paul", "Dj", "Anna"].my_none { |name| name.length >= 5 }
 
 puts "my_count should return 3"
 ["Jhon", "Paul", "Dj", "Anna"].my_count { |name| name.length >= 3 }

@@ -22,45 +22,28 @@ module Enumerable
   def my_select
     selected = []
     count = 0
-    while count < self.length
-      if yield(self[count])
-        selected << self[count]
-      end
-      count += 1
-    end
-      selected
+    my_each { |elem| selected << elem if yield(elem) }
+    selected
   end
 
+  #takes argument
   def my_all
-    count = 0
-    while count < self.length
-      if yield(self[count]) != true
-        return false
-      end
-      count += 1
-    end
+    my_each { |elem| return false if yield(elem) != true }
     true
   end
+
+  #takes argument
   def my_any
-    count = 0
-    while count < self.length
-      if yield(self[count]) == true
-        return true
-      end
-      count += 1
-    end
+    my_each { |elem| return true if yield(elem) == true }
     false
   end
+
+  #takes argument
   def my_none
-    count = 0
-    while count < self.length
-      if yield(self[count]) == true
-        return false
-      end
-      count += 1
-    end
-    true
+    !self.my_any { |elem| yield(elem) }
   end
+
+  
   def my_count(num = nil)
     if !block_given? && !num
       return self.length 
@@ -82,11 +65,8 @@ module Enumerable
   end
 
   def my_inject
-    count = 0
-    while count < self.length
-      acc = acc.nil? ? self[count] : yield(acc, self[count])
-      count += 1
-    end
+    acc = nil
+    my_each { |elem| acc = acc.nil? ? elem : yield(acc, elem) }
     acc
   end
 
