@@ -2,16 +2,6 @@ module Enumerable
   def my_each
     count = 0
     while count < self.length
-      yield(self[count])
-      count += 1
-    end
-    
-    self
-  end
-
-  def my_each_with_index
-    count = 0
-    while count < self.length
       yield(self[count], count)
       count += 1
     end
@@ -19,9 +9,12 @@ module Enumerable
     self
   end
 
+  def my_each_with_index
+    my_each { |elem, count| yield(elem, count) }
+  end
+
   def my_select
     selected = []
-    count = 0
     my_each { |elem| selected << elem if yield(elem) }
     selected
   end
