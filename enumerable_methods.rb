@@ -23,9 +23,20 @@ module Enumerable
     selected
   end
 
-  #takes argument
-  def my_all
-    my_each { |elem| return false if yield(elem) != true }
+  def my_all(arg = nil)
+    if block_given?
+      my_each { |elem| return false if yield(elem) != true }
+      return true #If all elements satisfy the block, we don't need to consider the parameters
+    end
+    if arg.nil?
+      my_each { |elem| return false if elem.nil? || elem == false }
+    elsif arg.kind_of? Class
+      my_each { |elem| return false if elem.class != arg }
+    elsif arg.class == Regexp
+      my_each { |elem| return false unless arg.match(elem) }
+    else
+      my_each { |elem| return false if elem != arg }
+    end
     true
   end
 

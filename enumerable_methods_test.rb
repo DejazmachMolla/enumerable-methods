@@ -1,49 +1,62 @@
 require './enumerable_methods.rb'
 
-puts "my_each --> the array should not be affected by the end of the operation"
+# my_each --> the array should not be affected by the end of the operation
 ["Jhon", "Paul", "Dj", "Anna"].my_each { |name|
   upcased = name.upcase
   print  upcased+ " " #To see the upcasing really works on each element
   upcased 
 }
 
-puts "my_each_with_index --> the array should not be affected by the end of the operation"
+# my_each_with_index --> the array should not be affected by the end of the operation
 ["Jhon", "Paul", "Dj", "Anna"].my_each_with_index { |name, index|
   indexed = name + " " + index.to_s
   print indexed +" " #To see the index really works on each element
   indexed
 }
 
-puts "my_select"
+# my_select
 ["Jhon", "Paul", "Dj", "Anna"].my_select { |name| name != "Dj" }
 
-puts "my_all"
+# my_all
 ["Jhon", "Paul", "Dj", "Anna"].my_all { |name| name.length >= 3 }
+[].my_all { |name| name.length >= 3 }
+# All elements of the array are strings so we expect true
+["Jhon", "Paul", "Dj", "Anna"].my_all (String)
+# 3 is not a string => all are not strings so we expect false
+["Jhon", 3, "Dj", "Anna"].my_all (String)
+# some do not contain t => we expect false
+["ant", "bear", "cat"].my_all(/t/)
+# all contain t => we expect true
+["ant", "mosquito", "cat"].my_all(/t/)
+# all are ant so we expect true
+["ant", "ant", "ant"].my_all("ant")
+# all are not ant so we expect false
+["ant", "ant", "cat"].my_all("ant")
 
-puts "my_any"
+# my_any
 ["Jhon", "Paul", "Dj", "Anna"].my_any { |name| name.length >= 3 }
 
-puts "my_none"
+# my_none
 ["Jhon", "Paul", "Dj", "Anna"].my_none { |name| name.length >= 5 }
 
-puts "my_count should return 3"
+# my_count should return 3
 ["Jhon", "Paul", "Dj", "Anna"].my_count { |name| name.length >= 3 }
 
-puts "my_count should return 4"
+# my_count should return 4
 ["Jhon", "Paul", "Dj", "Anna"].my_count
 
-puts "my_count should return 1"
+# my_count should return 1
 ["Jhon", "Paul", "Dj", "Anna"].my_count("Jhon")
 
-puts "my_map --> the array should be affected by the operation"
+# my_map --> the array should be affected by the operation
 ["Jhon", "Paul", "Dj", "Anna"].my_map { |name|
   upcased = name.upcase
-  print upcased + " " #To see the upcasing really works on each element
+  print upcased + " " # To see the upcasing really works on each element
   upcased
 }
 
-puts "my_inject"
+# my_inject
 [1, 2, 3, 4].my_inject { |sum, n| sum + n }
 
-puts "multiply_els"
+# multiply_els
 [1, 2, 3, 4].multiply_els
