@@ -42,8 +42,6 @@ module Enumerable
 
   #takes argument
   def my_any(arg = nil)
-    my_each { |elem| return true if yield(elem) == true }
-    false
     if block_given?
       my_each { |elem| return true if yield(elem) == true }
       return false #If no element satisfies the block, we just return false
@@ -61,8 +59,12 @@ module Enumerable
   end
 
   #takes argument
-  def my_none
-    !self.my_any { |elem| yield(elem) }
+  def my_none(arg = nil)
+    if block_given?
+      !self.my_any { |elem| yield(elem) }
+    else
+      !self.my_any(arg)
+    end
   end
 
   

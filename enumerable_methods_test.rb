@@ -37,8 +37,10 @@ require './enumerable_methods.rb'
 ["Jhon", "Paul", "Dj", "Anna"].my_any { |name| name.length >= 3 }
 
 # my_none
+# None has length greater than or equal to 5 => we expect true
 ["Jhon", "Paul", "Dj", "Anna"].my_none { |name| name.length >= 5 }
-
+# There is Dj so we expect false
+["Jhon", "Paul", "Dj", "Anna"].my_none("Dj")
 # my_count should return 3
 ["Jhon", "Paul", "Dj", "Anna"].my_count { |name| name.length >= 3 }
 
