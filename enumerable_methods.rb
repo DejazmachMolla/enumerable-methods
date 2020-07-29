@@ -1,8 +1,12 @@
 module Enumerable
   def my_each
+    arr = self if self.class == Array
+    arr = self.flatten if self.class == Hash
+    arr = self.to_a if self.class == Range
+
     count = 0
-    while count < self.length
-      yield(self[count], count)
+    while count < arr.length
+      yield(arr[count], count)
       count += 1
     end
     
@@ -63,7 +67,7 @@ module Enumerable
     acc
   end
 
-  def multiply_els()
+  def multiply_els
     self.my_inject { |res, elem| res * elem }
   end
 end
