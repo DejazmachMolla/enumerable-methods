@@ -28,6 +28,7 @@ module Enumerable
       my_each { |elem| return false if yield(elem) != true }
       return true #If all elements satisfy the block, we just return true
     end
+
     if arg.nil?
       my_each { |elem| return false if elem.nil? || elem == false }
     elsif arg.kind_of? Class
@@ -40,12 +41,12 @@ module Enumerable
     true
   end
 
-  #takes argument
   def my_any(arg = nil)
     if block_given?
       my_each { |elem| return true if yield(elem) == true }
       return false #If no element satisfies the block, we just return false
     end
+
     if arg.nil?
       my_each { |elem| return true if elem.nil? || elem == true }
     elsif arg.kind_of? Class
@@ -58,7 +59,6 @@ module Enumerable
     false
   end
 
-  #takes argument
   def my_none(arg = nil)
     if block_given?
       !self.my_any { |elem| yield(elem) }
@@ -83,6 +83,16 @@ module Enumerable
     
     self.my_each do |elem|
       array << yield(elem)
+    end
+    
+    array
+  end
+
+  def my_map_proc(p = nil)
+    array = []
+    
+    self.my_each do |elem|
+      array << proc.call(elem)
     end
     
     array

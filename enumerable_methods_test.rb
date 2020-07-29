@@ -51,11 +51,17 @@ require './enumerable_methods.rb'
 ["Jhon", "Paul", "Dj", "Anna"].my_count("Jhon")
 
 # my_map --> the array should be affected by the operation
-["Jhon", "Paul", "Dj", "Anna"].my_map { |name|
+.my_map { |name|
   upcased = name.upcase
   print upcased + " " # To see the upcasing really works on each element
   upcased
 }
+
+# my_map_proc
+p = Proc.new { |name|
+  upcased = name.upcase.to_s + " PROC"
+}
+["Jhon", "Paul", "Dj", "Anna"].my_map_proc(&p)
 
 # my_inject
 [1, 2, 3, 4].my_inject { |sum, n| sum + n }
