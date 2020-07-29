@@ -79,23 +79,38 @@ module Enumerable
   end
 
   def my_map
-    array = []
+    arr = []
     
     self.my_each do |elem|
-      array << yield(elem)
+      arr << yield(elem)
     end
     
-    array
+    arr
   end
 
   def my_map_proc(p = nil)
-    array = []
+    arr = []
     
     self.my_each do |elem|
-      array << proc.call(elem)
+      arr << proc.call(elem)
     end
     
-    array
+    arr
+  end
+
+  def my_map_proc_block(p = nil)
+    arr = []
+    if p
+      self.my_each do |elem|
+        arr << proc.call(elem)
+      end
+    else
+      self.my_each do |elem|
+        arr << yield(elem)
+      end
+    end
+    
+    arr
   end
 
   def my_inject
