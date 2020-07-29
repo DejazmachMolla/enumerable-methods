@@ -26,7 +26,7 @@ module Enumerable
   def my_all(arg = nil)
     if block_given?
       my_each { |elem| return false if yield(elem) != true }
-      return true #If all elements satisfy the block, we don't need to consider the parameters
+      return true #If all elements satisfy the block, we just return true
     end
     if arg.nil?
       my_each { |elem| return false if elem.nil? || elem == false }
@@ -41,8 +41,22 @@ module Enumerable
   end
 
   #takes argument
-  def my_any
+  def my_any(arg = nil)
     my_each { |elem| return true if yield(elem) == true }
+    false
+    if block_given?
+      my_each { |elem| return true if yield(elem) == true }
+      return false #If no element satisfies the block, we just return false
+    end
+    if arg.nil?
+      my_each { |elem| return true if elem.nil? || elem == true }
+    elsif arg.kind_of? Class
+      my_each { |elem| return true if elem.class == arg }
+    elsif arg.class == Regexp
+      my_each { |elem| return true if arg.match(elem) }
+    else
+      my_each { |elem| return true if elem == arg }
+    end
     false
   end
 
