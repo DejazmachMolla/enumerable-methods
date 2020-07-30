@@ -112,8 +112,7 @@ module Enumerable
     arr
   end
 
-  def my_inject
-    acc = nil
+  def my_inject(acc = nil)
     my_each { |elem| acc = acc.nil? ? elem : yield(acc, elem) }
     acc
   end

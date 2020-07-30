@@ -70,5 +70,8 @@ names.my_map_proc_block(p)
 # my_inject
 [1, 2, 3, 4].my_inject { |sum, n| sum + n }
 
+# my_inject with initial accumulator value
+[1, 2, 3, 4].my_inject(40) { |sum, n| sum + n }
+
 # multiply_els
 [1, 2, 3, 4].multiply_els
