@@ -17,8 +17,9 @@
 
 - Clone the project in to your computer using `git clone https://github.com/DejazmachMolla/enumerable-methods.git` 
 - `cd` into the `enumerable-methods` folder
-- Add your test code at the end of the file
-- run the command `ruby enumerable_methods.rb`
+- `run` runner.sh file by `double-clicking` on it if you are on Windows
+- Inspect the already written test along with the comments
+- Add your test code at the end of the `enumerable_methods_test.rb` file if necessary and execute the runner.sh file again
 
 ## Authors
 
