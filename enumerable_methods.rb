@@ -3,23 +3,28 @@
 # rubocop: disable Metrics/PerceivedComplexity
 module Enumerable
   def my_each
+    return to_enum(:my_each) unless block_given?
+
     arr = self if self.class == Array
     arr = flatten if self.class == Hash
     arr = to_a if self.class == Range
-
     count = 0
     while count < arr.length
       yield(arr[count], count)
       count += 1
     end
-    self
+    arr
   end
 
   def my_each_with_index
+    return to_enum(:my_each_with_index) unless block_given?
+
     my_each { |elem, count| yield(elem, count) }
   end
 
   def my_select
+    return to_enum(:my_select) unless block_given?
+
     selected = []
     my_each { |elem| selected << elem if yield(elem) }
     selected
@@ -50,7 +55,7 @@ module Enumerable
     end
 
     if arg.nil?
-      my_each { |elem| return true if elem.nil? || elem == true }
+      my_each { |elem| return true if elem == true || (!elem.nil? && !elem == false) }
     elsif arg.is_a? Class
       my_each { |elem| return true if elem.class == arg }
     elsif arg.class == Regexp
@@ -79,25 +84,25 @@ module Enumerable
     arr.my_select { |elem| yield(elem) }.length
   end
 
-  def my_map
-    arr = []
-    self_arr = self
-    self_arr.my_each do |elem|
-      arr << yield(elem)
-    end
-    arr
-  end
+  # def my_map
+  #   arr = []
+  #   self_arr = self
+  #   self_arr.my_each do |elem|
+  #     arr << yield(elem)
+  #   end
+  #   arr
+  # end
 
-  def my_map_proc(proc = nil)
-    arr = []
-    self_arr = self
-    self_arr.my_each do |elem|
-      arr << proc.call(elem)
-    end
-    arr
-  end
+  # def my_map_proc(proc = nil)
+  #   arr = []
+  #   self_arr = self
+  #   self_arr.my_each do |elem|
+  #     arr << proc.call(elem)
+  #   end
+  #   arr
+  # end
 
-  def my_map_proc_block(proc = nil)
+  def my_map(proc = nil)
     arr = []
     self_arr = self
     if proc
@@ -112,8 +117,19 @@ module Enumerable
     arr
   end
 
-  def my_inject(acc = nil)
-    my_each { |elem| acc = acc.nil? ? elem : yield(acc, elem) }
+  def my_inject(*args)
+    acc = nil
+    if args[0].is_a?(Symbol)
+      my_each { |elem| acc = acc.nil? ? elem : acc.send(args[0], elem) }
+    elsif args[0].nil?
+      my_each { |elem| acc = acc.nil? ? elem : acc = yield(acc, elem) }
+    elsif args[1].nil?
+      acc = args[0]
+      my_each { |elem| acc = yield(acc, elem) }
+    else
+      acc = args[0]
+      my_each { |elem| acc.send(args[1], elem) }
+    end
     acc
   end
 

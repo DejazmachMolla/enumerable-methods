@@ -7,12 +7,17 @@ names.my_each do |name|
   upcased
 end
 
+names.each.is_a?(Enumerator)
+names.my_each.is_a?(Enumerator)
+
 # my_each_with_index --> the array should not be affected by the end of the operation
 names.my_each_with_index do |name, index|
   indexed = name + ' ' + index.to_s
   print indexed + ' ' # To see the index really works on each element
   indexed
 end
+
+names.my_each_with_index.is_a?(Enumerator)
 
 # my_select
 names.my_select { |name| name != 'Dj' }
@@ -35,10 +40,15 @@ names.my_all String
 
 # my_any
 names.my_any { |name| name.length >= 3 }
+false_array = [nil, false, nil, false]
+false_array.any?
+false_array.my_any
 
 # my_none
 # None has length greater than or equal to 5 => we expect true
 names.my_none { |name| name.length >= 5 }
+false_array.none?
+false_array.my_none
 # There is Dj so we expect false
 names.my_none('Dj')
 # my_count should return 3
@@ -58,20 +68,22 @@ names.my_map do |name|
 end
 # my_map_proc
 p = proc { |name| name.upcase.to_s + ' PROC' }
-names.my_map_proc(p)
+names.my_map(p)
 
 # my_map_proc_block with block
-names.my_map_proc_block { |name| name.upcase.to_s + ' PROC_BLOCK BLOCK' }
+names.my_map { |name| name.upcase.to_s + ' PROC_BLOCK BLOCK' }
 
 # my_map_proc_block with proc
 p = proc { |name| name.upcase.to_s + ' PROC_BLOCK PROC ' }
-names.my_map_proc_block(p)
+names.my_map(p)
 
 # my_inject
 [1, 2, 3, 4].my_inject { |sum, n| sum + n }
 
 # my_inject with initial accumulator value
 [1, 2, 3, 4].my_inject(40) { |sum, n| sum + n }
+array.inject(:+)
+array.my_inject(:+)
 
 # multiply_els
 [1, 2, 3, 4].multiply_els

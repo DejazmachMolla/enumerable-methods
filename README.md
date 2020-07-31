@@ -20,6 +20,7 @@
 - `run` runner.sh file by `double-clicking` on it if you are on Windows
 - Inspect the already written test along with the comments
 - Add your test code at the end of the `enumerable_methods_test.rb` file if necessary and execute the runner.sh file again
+- Click any key to exit the execution window
 
 ## Authors
 
