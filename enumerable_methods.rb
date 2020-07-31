@@ -120,7 +120,7 @@ module Enumerable
 
   def multiply_els
     arr = self
-    arr.my_inject { |res, elem| res * elem.to_i }
+    arr.my_inject { |res, elem| res * elem }
   end
 end
 # rubocop: enable Metrics/ModuleLength
