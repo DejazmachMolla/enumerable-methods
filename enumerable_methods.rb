@@ -13,6 +13,7 @@ module Enumerable
       yield(arr[count], count)
       count += 1
     end
+    p arr
     arr
   end
 
@@ -112,14 +113,14 @@ module Enumerable
       my_each { |elem| acc = yield(acc, elem) }
     else
       acc = args[0]
-      my_each { |elem| acc.send(args[1], elem) }
+      my_each { |elem| acc = acc.send(args[1], elem) }
     end
     acc
   end
 
   def multiply_els
     arr = self
-    arr.my_inject { |res, elem| res * elem }
+    arr.my_inject { |res, elem| res * elem.to_i }
   end
 end
 # rubocop: enable Metrics/ModuleLength

@@ -86,5 +86,8 @@ array = [5, 4, 6, 7]
 array.inject(:+)
 array.my_inject(:+)
 
+range = Range.new(5, 50)
+range.my_inject(2, :*)
+
 # multiply_els
 [1, 2, 3, 4].multiply_els
