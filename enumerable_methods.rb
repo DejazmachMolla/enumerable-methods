@@ -30,7 +30,7 @@ module Enumerable
     selected
   end
 
-  def my_all(arg = nil)
+  def my_all?(arg = nil)
     if block_given?
       my_each { |elem| return false if yield(elem) != true }
       return true
@@ -48,7 +48,7 @@ module Enumerable
     true
   end
 
-  def my_any(arg = nil)
+  def my_any?(arg = nil)
     if block_given?
       my_each { |elem| return true if yield(elem) == true }
       return false
@@ -66,12 +66,12 @@ module Enumerable
     false
   end
 
-  def my_none(arg = nil)
+  def my_none?(arg = nil)
     arr = self
     if block_given?
-      !arr.my_any { |elem| yield(elem) }
+      !arr.my_any? { |elem| yield(elem) }
     else
-      !arr.my_any(arg)
+      !arr.my_any?(arg)
     end
   end
 
@@ -84,12 +84,14 @@ module Enumerable
     arr.my_select { |elem| yield(elem) }.length
   end
 
-  def my_map(proc = nil)
+  def my_map(*arg)
+    return to_enum(:my_map) unless block_given?
+
     arr = []
     self_arr = self
-    if proc
+    if arg[0]
       self_arr.my_each do |elem|
-        arr << proc.call(elem)
+        arr << arg[0].call(elem)
       end
     else
       self_arr.my_each do |elem|

@@ -22,35 +22,35 @@ names.my_each_with_index.is_a?(Enumerator)
 # my_select
 names.my_select { |name| name != 'Dj' }
 
-# my_all
-names.my_all { |name| name.length >= 3 }
-[].my_all { |name| name.length >= 3 }
+# my_all?
+names.my_all? { |name| name.length >= 3 }
+[].my_all? { |name| name.length >= 3 }
 # All elements of the array are strings so we expect true
-names.my_all String
+names.my_all? String
 # 3 is not a string => all are not strings so we expect false
-['Jhon', 3, 'Dj', 'Anna'].my_all String
+['Jhon', 3, 'Dj', 'Anna'].my_all? String
 # some do not contain t => we expect false
-%w[ant bear cat].my_all(/t/)
+%w[ant bear cat].my_all?(/t/)
 # all contain t => we expect true
-%w[ant mosquito cat].my_all(/t/)
+%w[ant mosquito cat].my_all?(/t/)
 # all are ant so we expect true
-%w[ant ant ant].my_all('ant')
+%w[ant ant ant].my_all?('ant')
 # all are not ant so we expect false
-%w[ant ant cat].my_all('ant')
+%w[ant ant cat].my_all?('ant')
 
-# my_any
-names.my_any { |name| name.length >= 3 }
+# my_any?
+names.my_any? { |name| name.length >= 3 }
 false_array = [nil, false, nil, false]
 false_array.any?
-false_array.my_any
+false_array.my_any?
 
-# my_none
+# my_none?
 # None has length greater than or equal to 5 => we expect true
-names.my_none { |name| name.length >= 5 }
+names.my_none? { |name| name.length >= 5 }
 false_array.none?
-false_array.my_none
+false_array.my_none?
 # There is Dj so we expect false
-names.my_none('Dj')
+names.my_none?('Dj')
 # my_count should return 3
 names.my_count { |name| name.length >= 3 }
 
@@ -82,6 +82,7 @@ names.my_map(p)
 
 # my_inject with initial accumulator value
 [1, 2, 3, 4].my_inject(40) { |sum, n| sum + n }
+array = [5, 4, 6, 7]
 array.inject(:+)
 array.my_inject(:+)
 
