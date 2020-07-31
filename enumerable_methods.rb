@@ -84,24 +84,6 @@ module Enumerable
     arr.my_select { |elem| yield(elem) }.length
   end
 
-  # def my_map
-  #   arr = []
-  #   self_arr = self
-  #   self_arr.my_each do |elem|
-  #     arr << yield(elem)
-  #   end
-  #   arr
-  # end
-
-  # def my_map_proc(proc = nil)
-  #   arr = []
-  #   self_arr = self
-  #   self_arr.my_each do |elem|
-  #     arr << proc.call(elem)
-  #   end
-  #   arr
-  # end
-
   def my_map(proc = nil)
     arr = []
     self_arr = self
