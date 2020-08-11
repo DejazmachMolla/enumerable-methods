@@ -38,9 +38,15 @@ describe Enumerable do
     end
   end
 
-  describe '#my_all' do
+  describe '#my_all?' do
     it 'returns false since all are not even' do
-      expect(test_array.my_all? { |elem| elem % 2 == 0 })
+      expect(test_array.my_all? { |elem| elem % 2 == 0 }).to eql(false)
+    end
+  end
+
+  describe '#my_any?' do
+    it 'returns true since some elements are odd' do
+      expect(test_array.my_any? { |elem| elem % 2 != 0 }).to eql(true)
     end
   end
 end
