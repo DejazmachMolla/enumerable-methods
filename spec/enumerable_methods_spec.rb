@@ -49,4 +49,14 @@ describe Enumerable do
       expect(test_array.my_any? { |elem| elem % 2 != 0 }).to eql(true)
     end
   end
+
+  describe '#my_none?' do
+    it 'returns true since no element is negative' do
+      expect(test_array.my_none? { |elem| elem < 0 }).to eql(true)
+    end
+
+    it 'returns false since some elements are odd' do
+      expect(test_array.my_none? { |elem| elem % 2 != 0 }).to eql(false)
+    end
+  end
 end
