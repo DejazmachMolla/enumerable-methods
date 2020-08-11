@@ -18,4 +18,17 @@ describe Enumerable do
     end
   end
 
+  describe '#my_each_with_index' do
+    it 'returns the array itself' do
+      expect(test_array.my_each_with_index.to_a).to eql([[1, 0], [2, 1], [5, 2], [3, 3]])
+    end
+
+    it 'operation affects each element' do
+      affected_array = []
+      test_array.my_each_with_index do |elem, index|
+        affected_array << elem + index
+      end
+      expect(affected_array).to eql([1, 3, 7, 6])
+    end
+  end
 end
