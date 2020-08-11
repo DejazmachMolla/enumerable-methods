@@ -10,17 +10,24 @@ module Enumerable
     arr = to_a if self.class == Range
     count = 0
     while count < arr.length
-      yield(arr[count], count)
+      yield(arr[count])
       count += 1
     end
-    p arr
     arr
   end
 
   def my_each_with_index
     return to_enum(:my_each_with_index) unless block_given?
 
-    my_each { |elem, count| yield(elem, count) }
+    arr = self if self.class == Array
+    arr = flatten if self.class == Hash
+    arr = to_a if self.class == Range
+    count = 0
+    while count < arr.length
+      yield(arr[count], count)
+      count += 1
+    end
+    arr
   end
 
   def my_select

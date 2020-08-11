@@ -1,0 +1,21 @@
+require_relative '../enumerable_methods.rb'
+
+# spec/enumerable_methods_spec.rb
+describe Enumerable do
+  let (:test_array) { [1, 2, 5, 3]}
+
+  describe '#my_each' do
+    it 'returns the array itself' do
+      expect(test_array.my_each.to_a).to eql(test_array)
+    end
+
+    it 'operation affects each element' do
+      affected_array = []
+      test_array.my_each do |elem|
+        affected_array << elem + 2
+      end
+      expect(affected_array).to eql([3, 4, 7, 5])
+    end
+  end
+
+end
