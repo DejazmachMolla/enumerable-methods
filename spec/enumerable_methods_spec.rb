@@ -48,6 +48,10 @@ describe Enumerable do
     it 'returns true since some elements are odd' do
       expect(test_array.my_any? { |elem| elem % 2 != 0 }).to eql(true)
     end
+
+    it 'returns false since all are below 7' do
+      expect(test_array.my_any? { |elem| elem > 10 }).to eql(false)
+    end
   end
 
   describe '#my_none?' do
