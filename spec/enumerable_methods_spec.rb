@@ -31,4 +31,10 @@ describe Enumerable do
       expect(affected_array).to eql([1, 3, 7, 6])
     end
   end
+
+  describe '#my_select' do
+    it 'selects even numbers only' do
+      expect(test_array.my_select { |elem| elem % 2 == 0 }).to eql([2])
+    end
+  end
 end
