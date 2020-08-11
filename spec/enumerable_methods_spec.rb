@@ -63,4 +63,10 @@ describe Enumerable do
       expect(test_array.my_none? { |elem| elem % 2 != 0 }).to eql(false)
     end
   end
+
+  describe '#my_count?' do
+    it 'returns the number of odd elements' do
+      expect(test_array.my_count { |elem| elem % 2 != 0 }).to eql(3)
+    end
+  end
 end
