@@ -89,6 +89,10 @@ describe Enumerable do
     it 'takes accumulator and returns the sum of the array elements' do
       expect(test_array.my_inject(10) {  |sum, n| sum + n  }).to eql(21)
     end
+
+    it 'takes Symbol and returns the multiplication of the array elements' do
+      expect(test_array.my_inject(:*)).to eql(30)
+    end
   end
 
 end
