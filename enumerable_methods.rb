@@ -93,7 +93,7 @@ module Enumerable
   end
 
   def my_map(*arg)
-    return to_enum(:my_map) unless block_given?
+    return to_enum(:my_map) unless block_given? || arg[0]
 
     arr = []
     self_arr = self

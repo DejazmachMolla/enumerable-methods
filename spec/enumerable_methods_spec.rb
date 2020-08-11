@@ -69,4 +69,16 @@ describe Enumerable do
       expect(test_array.my_count { |elem| elem % 2 != 0 }).to eql(3)
     end
   end
+
+  describe '#my_map' do
+    it 'returns the modifid array' do
+      expect(test_array.my_map { |elem| elem * 2 }).to eql([2, 4, 10, 6])
+    end
+
+    it 'my_map works with proc' do
+      p = proc { |elem| elem + 1 }
+      expect(test_array.my_map(p)).to eql([2, 3, 6, 4])
+    end
+  end
+
 end
