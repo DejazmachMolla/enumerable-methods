@@ -37,4 +37,10 @@ describe Enumerable do
       expect(test_array.my_select { |elem| elem % 2 == 0 }).to eql([2])
     end
   end
+
+  describe '#my_all' do
+    it 'returns false since all are not even' do
+      expect(test_array.my_all? { |elem| elem % 2 == 0 })
+    end
+  end
 end
