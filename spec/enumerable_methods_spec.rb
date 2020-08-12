@@ -39,23 +39,49 @@ describe Enumerable do
         expect(test_array.my_each.to_a).to eql(test_array)
       end
   
-      it 'returns the original range itself : no mutation' do
+      it 'returns the original Range itself : no mutation' do
         expect(test_range.my_each.to_a).to eql(test_range.to_a)
       end
     end
   end
 
   describe '#my_each_with_index' do
-    it 'returns the array itself' do
-      expect(test_array.my_each_with_index.to_a).to eql([[1, 0], [2, 1], [5, 2], [3, 3]])
+    context 'block given : ' do
+      it 'returns the original array itself : no mutation' do
+        affected_array = []
+        expect(test_array.my_each_with_index { |elem| affected_array << elem + 2 }).to eql(test_array)
+      end
+
+      it 'operation affects each element of the array inside the block correctly' do
+        affected_array = []
+        test_array.my_each_with_index do |elem, index|
+          affected_array << elem + index
+        end
+        expect(affected_array).to eql([1, 3, 7, 6])
+      end
+
+      it 'returns the original Range as an Array : no mutation' do
+        affected_array = []
+        expect(test_range.my_each_with_index { |elem| affected_array << elem + 3 }).to eql(test_range.to_a)
+      end
+      
+      it 'operation affects each element of the Range in the block' do
+        affected_array = []
+        test_range.my_each_with_index do |elem|
+          affected_array << elem + 3
+        end
+        expect(affected_array).to eql([4, 5, 6, 7, 8])
+      end
     end
 
-    it 'operation affects each element' do
-      affected_array = []
-      test_array.my_each_with_index do |elem, index|
-        affected_array << elem + index
+    context 'block not given : ' do
+      it 'returns the original array itself with index appended: no mutation' do
+        expect(test_array.my_each_with_index.to_a).to eql([[1, 0], [2, 1], [5, 2], [3, 3]])
       end
-      expect(affected_array).to eql([1, 3, 7, 6])
+  
+      it 'returns the original Range itself : no mutation' do
+        expect(test_range.my_each_with_index.to_a).to eql([[1, 0], [2, 1], [3, 2], [4, 3], [5, 4]])
+      end
     end
   end
 
