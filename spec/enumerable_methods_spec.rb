@@ -24,6 +24,14 @@ describe Enumerable do
         affected_array = []
         expect(test_range.my_each { |elem| affected_array << elem + 3 }).to eql(test_range.to_a)
       end
+      
+      it 'operation affects each element of the Range in the block' do
+        affected_array = []
+        test_range.my_each do |elem|
+          affected_array << elem + 3
+        end
+        expect(affected_array).to eql([4, 5, 6, 7, 8])
+      end
     end
 
     context 'block not given : ' do
