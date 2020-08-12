@@ -3,8 +3,8 @@ require_relative '../enumerable_methods.rb'
 # spec/enumerable_methods_spec.rb
 describe Enumerable do
   let(:test_array) { [1, 2, 5, 3] }
-  let(:test_range) { Range.new(1, 5)}
-  let(:word_array) { %w[Dj Anna Paul]}
+  let(:test_range) { Range.new(1, 5) }
+  let(:word_array) { %w[Dj Anna Paul] }
 
   describe '#my_each' do
     context 'block given : ' do
@@ -25,7 +25,7 @@ describe Enumerable do
         affected_array = []
         expect(test_range.my_each { |elem| affected_array << elem + 3 }).to eql(test_range.to_a)
       end
-      
+
       it 'operation affects each element of the Range in the block' do
         affected_array = []
         test_range.my_each do |elem|
@@ -39,7 +39,7 @@ describe Enumerable do
       it 'returns the original array itself : no mutation' do
         expect(test_array.my_each.to_a).to eql(test_array)
       end
-  
+
       it 'returns the original Range itself : no mutation' do
         expect(test_range.my_each.to_a).to eql(test_range.to_a)
       end
@@ -65,7 +65,7 @@ describe Enumerable do
         affected_array = []
         expect(test_range.my_each_with_index { |elem| affected_array << elem + 3 }).to eql(test_range.to_a)
       end
-      
+
       it 'operation affects each element of the Range in the block' do
         affected_array = []
         test_range.my_each_with_index do |elem|
@@ -79,7 +79,7 @@ describe Enumerable do
       it 'returns the original array itself with index appended: no mutation' do
         expect(test_array.my_each_with_index.to_a).to eql([[1, 0], [2, 1], [5, 2], [3, 3]])
       end
-  
+
       it 'returns the original Range itself : no mutation' do
         expect(test_range.my_each_with_index.to_a).to eql([[1, 0], [2, 1], [3, 2], [4, 3], [5, 4]])
       end
@@ -101,12 +101,11 @@ describe Enumerable do
       it 'selects numbers greater than 5 only : original array mutated' do
         expect(test_array.my_select { |elem| elem > 5 }).to eql([])
       end
-  
+
       it 'selects numbers greater than 3 only : original Range mutated' do
         expect(test_range.my_select { |elem| elem > 3 }).to eql([4, 5])
       end
     end
-
   end
 
   describe '#my_all?' do
@@ -146,6 +145,14 @@ describe Enumerable do
   describe '#my_count?' do
     it 'returns the number of elements greater than or equal to 2' do
       expect(test_array.my_count { |elem| elem >= 2 }).to eql(3)
+    end
+
+    it 'returns the number of elements similar to the argument string' do
+      expect(word_array.my_count('Dj')).to eq(1)
+    end
+
+    it 'returns the total number of elements when no block or argument is given' do
+      expect(word_array.my_count).to eq(3)
     end
   end
 
