@@ -4,6 +4,7 @@ require_relative '../enumerable_methods.rb'
 describe Enumerable do
   let(:test_array) { [1, 2, 5, 3] }
   let(:test_range) { Range.new(1, 5)}
+  let(:word_array) { %w[Dj Anna Paul]}
 
   describe '#my_each' do
     context 'block given : ' do
@@ -86,14 +87,39 @@ describe Enumerable do
   end
 
   describe '#my_select' do
-    it 'selects numbers greater than 5 only' do
-      expect(test_array.my_select { |elem| elem > 5 }).to eql([])
+    context 'block not given : ' do
+      it 'selects every elemnt if block is not given' do
+        expect(test_array.my_select.to_a).to eql(test_array)
+      end
+
+      it 'selects every elemnt in the Range if block is not given as an array' do
+        expect(test_range.my_select.to_a).to eql(test_range.to_a)
+      end
     end
+
+    context 'block given : ' do
+      it 'selects numbers greater than 5 only : original array mutated' do
+        expect(test_array.my_select { |elem| elem > 5 }).to eql([])
+      end
+  
+      it 'selects numbers greater than 3 only : original Range mutated' do
+        expect(test_range.my_select { |elem| elem > 3 }).to eql([4, 5])
+      end
+    end
+
   end
 
   describe '#my_all?' do
     it 'returns false since all are not less than 3' do
       expect(test_array.my_all? { |elem| elem < 3 }).to eql(false)
+    end
+
+    it 'returns true since all are positive' do
+      expect(test_array.my_all? { |elem| elem > 0 }).to eql(true)
+    end
+
+    it 'returns true since all words are composed of letters only' do
+      expect(word_array.my_all?(/[a-zA-Z]/)).to eql(true)
     end
   end
 
