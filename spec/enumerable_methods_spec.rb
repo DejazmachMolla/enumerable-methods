@@ -22,6 +22,10 @@ describe Enumerable do
       affected_array = []
       expect(test_array.my_each { |elem| affected_array << elem + 2 }).to eql(test_array)
     end
+    
+    it 'returns the original range itself : no mutation' do
+      expect(test_range.my_each.to_a).to eql(test_range.to_a)
+    end
   end
 
   describe '#my_each_with_index' do
