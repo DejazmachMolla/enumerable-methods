@@ -6,25 +6,29 @@ describe Enumerable do
   let(:test_range) { Range.new(1, 5)}
 
   describe '#my_each' do
-    it 'returns the original array itself : no mutation' do
-      expect(test_array.my_each.to_a).to eql(test_array)
-    end
-
-    it 'operation affects each element in the block' do
-      affected_array = []
-      test_array.my_each do |elem|
-        affected_array << elem + 2
+    context 'block given : ' do
+      it 'returns the original array itself : no mutation' do
+        affected_array = []
+        expect(test_array.my_each { |elem| affected_array << elem + 2 }).to eql(test_array)
       end
-      expect(affected_array).to eql([3, 4, 7, 5])
+
+      it 'operation affects each element in the block' do
+        affected_array = []
+        test_array.my_each do |elem|
+          affected_array << elem + 2
+        end
+        expect(affected_array).to eql([3, 4, 7, 5])
+      end
     end
 
-    it 'returns the original array itself : no mutation' do
-      affected_array = []
-      expect(test_array.my_each { |elem| affected_array << elem + 2 }).to eql(test_array)
-    end
-    
-    it 'returns the original range itself : no mutation' do
-      expect(test_range.my_each.to_a).to eql(test_range.to_a)
+    context 'block not given' do
+      it 'returns the original array itself : no mutation' do
+        expect(test_array.my_each.to_a).to eql(test_array)
+      end
+  
+      it 'returns the original range itself : no mutation' do
+        expect(test_range.my_each.to_a).to eql(test_range.to_a)
+      end
     end
   end
 
