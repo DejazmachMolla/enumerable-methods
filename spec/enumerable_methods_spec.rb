@@ -12,16 +12,21 @@ describe Enumerable do
         expect(test_array.my_each { |elem| affected_array << elem + 2 }).to eql(test_array)
       end
 
-      it 'operation affects each element in the block' do
+      it 'operation affects each element of the array in the block' do
         affected_array = []
         test_array.my_each do |elem|
           affected_array << elem + 2
         end
         expect(affected_array).to eql([3, 4, 7, 5])
       end
+
+      it 'returns the original Range as an Array : no mutation' do
+        affected_array = []
+        expect(test_range.my_each { |elem| affected_array << elem + 3 }).to eql(test_range.to_a)
+      end
     end
 
-    context 'block not given' do
+    context 'block not given : ' do
       it 'returns the original array itself : no mutation' do
         expect(test_array.my_each.to_a).to eql(test_array)
       end
